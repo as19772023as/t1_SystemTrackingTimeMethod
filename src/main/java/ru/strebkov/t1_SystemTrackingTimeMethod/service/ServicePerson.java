@@ -14,10 +14,9 @@ import java.util.List;
 public class ServicePerson {
     private final RepositoryPerson repository;
 
-    @TrackTime
-    public List<Person> findByCityOfLiving(String city) {
-        System.out.println("Execute method synchro - "
-                + Thread.currentThread().getName());
+    //@TrackTime
+    public List<Person> findByCityOfLivingS(String city) {
+        System.out.println("Execute method synchro - " + Thread.currentThread().getName());
         return repository.findByCityOfLiving(city);
     }
 

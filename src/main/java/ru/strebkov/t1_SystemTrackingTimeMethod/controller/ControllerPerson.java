@@ -1,6 +1,7 @@
 package ru.strebkov.t1_SystemTrackingTimeMethod.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/persons")
 public class ControllerPerson {
 
@@ -22,7 +23,7 @@ public class ControllerPerson {
     @TrackTime
     @GetMapping("/by-city") //localhost:8080/persons/by-city?city=Moscow
     public List<Person> getPersonsByCity(@RequestParam(value = "city", required = false) String city) {
-        return service.findByCityOfLiving(city);
+        return service.findByCityOfLivingS(city);
     }
 
 }

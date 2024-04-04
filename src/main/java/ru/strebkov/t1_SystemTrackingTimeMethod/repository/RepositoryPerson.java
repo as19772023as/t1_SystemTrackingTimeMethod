@@ -9,8 +9,7 @@ import java.util.List;
 
 @Repository
 public interface RepositoryPerson extends JpaRepository<Person, Integer> {
-
-    @TrackTime
+    //@TrackTime
     List<Person> findByCityOfLiving(String cityOfLiving);
     
 }
