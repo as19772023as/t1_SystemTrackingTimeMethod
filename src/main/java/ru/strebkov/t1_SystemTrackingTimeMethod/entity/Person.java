@@ -14,7 +14,7 @@ import lombok.*;
 public class Person {
     @Id
     @Column(name = "id_person")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPerson;
     @Column(length = 100, nullable = false)
     private String name;

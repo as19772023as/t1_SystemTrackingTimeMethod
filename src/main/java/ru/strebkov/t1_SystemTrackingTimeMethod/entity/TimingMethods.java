@@ -13,7 +13,7 @@ import lombok.*;
 public class TimingMethods {
     @Id
     @Column(name = "id_timing_methods")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idTimingMethods;
     @Column(name = "name_method", nullable = false)
     private String methodName;

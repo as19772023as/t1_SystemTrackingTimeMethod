@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import ru.strebkov.t1_SystemTrackingTimeMethod.exception.PersonException;
 import ru.strebkov.t1_SystemTrackingTimeMethod.service.ServiceSaveData;
 
 @Component
@@ -35,6 +36,9 @@ public class TrackTimeCheckerAspect {
     @After("afterPointcut()")
     public void afterTrackTime(JoinPoint jp) {
         String methodName = jp.getSignature().getName();
+        if (methodName == null) {
+            throw new PersonException("Имя метода не должно быть null ");
+        }
         long endTime = System.currentTimeMillis();
         serviceSaveData.saveData(methodName, endTime - startTime);
     }

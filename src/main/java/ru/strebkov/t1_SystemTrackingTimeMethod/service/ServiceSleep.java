@@ -7,9 +7,8 @@ import ru.strebkov.t1_SystemTrackingTimeMethod.repository.RepositorySleep;
 @Service
 @RequiredArgsConstructor
 public class ServiceSleep {
-    private  final RepositorySleep repositoryExample;
+    private final RepositorySleep repositoryExample;
 
-   //  @TrackAsyncTime
     public String saveSleep(int runtimeSimulation) {
         return repositoryExample.saveSleep(runtimeSimulation);
     }

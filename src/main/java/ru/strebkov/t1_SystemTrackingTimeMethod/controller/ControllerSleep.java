@@ -14,8 +14,7 @@ public class ControllerSleep {
 
     @TrackAsyncTime
     @GetMapping("/sleep") //localhost:8080/sleep?sleep=4000
-    public String getSleep(@RequestParam(value = "sleep", required = false) int runtimeSimulation)
-            throws InterruptedException {
+    public String getSleep(@RequestParam(value = "sleep", required = false) int runtimeSimulation) {
         return serviceExample.saveSleep(runtimeSimulation);
     }
 

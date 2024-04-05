@@ -28,6 +28,7 @@ public class ServiceStatistics {
     public List<TimingMethods> getTotalTimeByMethodGroup(String method1, String method2) {
         return repositoryStatistics.getTotalTimeByMethodGroup(method1, method2);
     }
+
     @Transactional
     public List<TimingMethods> getAvgTimeByMethodGroup(String method1, String method2) {
         return repositoryStatistics.getAvgTimeByMethodGroup(method1, method2);
