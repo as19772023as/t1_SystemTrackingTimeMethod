@@ -3,18 +3,24 @@ package ru.strebkov.t1_SystemTrackingTimeMethod.aspect;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import ru.strebkov.t1_SystemTrackingTimeMethod.service.ServiceSaveData;
+import org.springframework.web.context.annotation.RequestScope;
+import ru.strebkov.t1_SystemTrackingTimeMethod.service.ServiceStatistics;
 
 @Component
 @Aspect
 @RequiredArgsConstructor
+@Scope("prototype")
 @Slf4j
 public class TrackAsyncTimeCheckerAspect {
 
-    private final ServiceSaveData serviceSaveData;
+    private final ServiceStatistics serviceStatistics;
     private long startTime;
 
     @Pointcut("@annotation(ru.strebkov.t1_SystemTrackingTimeMethod.annotation.TrackAsyncTime)")
@@ -32,6 +38,7 @@ public class TrackAsyncTimeCheckerAspect {
     @Before("beforePointcut()")
     public void beforeTrackAsyncTime() {
         startTime = System.currentTimeMillis();
+        log.info("Время старта Asin = " + startTime);
     }
 
 
@@ -40,7 +47,10 @@ public class TrackAsyncTimeCheckerAspect {
     public void afterTrackAsyncTime(JoinPoint jp) {
         String methodName = jp.getSignature().getName();
         long endTime = System.currentTimeMillis();
-        serviceSaveData.saveData(methodName, endTime - startTime);
+        serviceStatistics.saveData(methodName, endTime - startTime);
+        log.info("Время stop Asin = " + endTime);
+        long x = endTime - startTime;
+        log.info("Время  ASin = " + x);
     }
 
 }

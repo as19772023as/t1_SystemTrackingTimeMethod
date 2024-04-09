@@ -7,17 +7,20 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 import ru.strebkov.t1_SystemTrackingTimeMethod.exception.PersonException;
-import ru.strebkov.t1_SystemTrackingTimeMethod.service.ServiceSaveData;
+import ru.strebkov.t1_SystemTrackingTimeMethod.service.ServiceStatistics;
 
 @Component
 @RequiredArgsConstructor
 @Aspect
+@Scope("prototype")
 @Slf4j
 public class TrackTimeCheckerAspect {
 
-    private final ServiceSaveData serviceSaveData;
+    private final ServiceStatistics serviceStatistics;
     private long startTime;
 
     @Pointcut("@annotation(ru.strebkov.t1_SystemTrackingTimeMethod.annotation.TrackTime)")
@@ -30,7 +33,9 @@ public class TrackTimeCheckerAspect {
 
     @Before("beforePointcut()")
     public void beforeTrackTime() {
+
         startTime = System.currentTimeMillis();
+        log.info("Время старта Sinx = " + startTime );
     }
 
     @After("afterPointcut()")
@@ -40,7 +45,10 @@ public class TrackTimeCheckerAspect {
             throw new PersonException("Имя метода не должно быть null ");
         }
         long endTime = System.currentTimeMillis();
-        serviceSaveData.saveData(methodName, endTime - startTime);
+        serviceStatistics.saveData(methodName, endTime - startTime);
+        log.info("Время stop Sinx = " + endTime );
+        long x = endTime - startTime;
+        log.info("Время  Sinx = " + x );
     }
 
 }

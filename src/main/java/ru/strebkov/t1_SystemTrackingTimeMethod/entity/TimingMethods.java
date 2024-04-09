@@ -14,9 +14,10 @@ public class TimingMethods {
     @Id
     @Column(name = "id_timing_methods")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idTimingMethods;
+    private long id;
     @Column(name = "name_method", nullable = false)
     private String methodName;
     @Column(name = "time_total", nullable = false)
-    private double totalTime;
+    private long totalTime;
+
 }
